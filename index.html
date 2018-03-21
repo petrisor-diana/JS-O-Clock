@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS O'Clock</title>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="clockFace">
+            <div class="hand" id="hour"></div>
+            <div class="hand" id="minutes"></div>
+            <div class="hand" id="seconds"></div>
+        </div>
+</body>
+
+</html>
+
+<style>
+    body {
+        background-image: url('https://i.pinimg.com/originals/d0/8e/03/d08e03b35868b251ab4834344aa34f1e.jpg');
+        text-align: center;
+    }
+
+    .clock {
+        height: 360px;
+        width: 360px;
+        margin: 8% auto;
+        border: 20px solid rgb(48, 47, 47);
+        border-radius: 50%;
+    }
+
+    .clockFace {
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+
+    .hand {
+        height: 45%;
+        width: 10px;
+        background-color: rgb(91, 96, 105);
+        top: 5%;
+        left: 50%;
+        display: block;
+        position: absolute;
+        transform-origin: bottom;
+        transition-timing-function: cubic-bezier(0.42, 0, 0.13, 0.88);
+    }
+   
+</style>
+
+<script>
+
+var divSeconds = document.querySelector('#seconds');
+var divMinutes = document.querySelector('#minutes');
+var divHour = document.querySelector('#hour');
+
+    function setSeconds() {
+        const now = new Date();
+        const seconds = now.getSeconds();
+        const secondsDegree = Math.round((seconds / 60) * 360);
+        divSeconds.style.transform = `rotate(${secondsDegree}deg)`;
+
+        const minutes = now.getMinutes();
+        const minutesDegree = Math.round((minutes/60)*360);
+        divMinutes.style.transform = `rotate(${minutesDegree}deg)`;
+
+        const hour = now.getHours();
+        const hourDegree = Math.round((hour/12)*360);
+        divHour.style.transform = `rotate(${hourDegree}deg)`;
+      
+    }
+    setInterval(setSeconds, 1000);
+</script>
